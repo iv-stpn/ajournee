@@ -1,0 +1,92 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserType {
+  id: ID!
+
+  """First Name of the user"""
+  firstName: String!
+
+  """Last Name of the user"""
+  lastName: String!
+
+  """E-mail of the user"""
+  email: String!
+
+  """Password of the user"""
+  password: String!
+
+  """Birthdate of the user"""
+  birthdate: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  Users: [UserType!]!
+  User(id: String!): UserType
+  whoami: UserType
+  UserByCriteria(filter: FilterUserInput!): [UserType!]!
+}
+
+input FilterUserInput {
+  """First Name of the user"""
+  firstName: [String!]
+
+  """Last Name of the user"""
+  lastName: [String!]
+
+  """E-mail of the user"""
+  email: [String!]
+
+  """Password of the user"""
+  password: [String!]
+
+  """Birthdate of the user"""
+  birthdate: DateTime
+}
+
+type Mutation {
+  createUser(input: UserInput!): UserType!
+  updateUser(id: String!, input: UpdateUserInput!): UserType
+  deleteUser(id: String!): UserType
+  deleteByCriteria(filter: FilterUserInput!): [UserType!]!
+}
+
+input UserInput {
+  """First Name of the user"""
+  firstName: String!
+
+  """Last Name of the user"""
+  lastName: String!
+
+  """E-mail of the user"""
+  email: String!
+
+  """Password of the user"""
+  password: String!
+
+  """Birthdate of the user"""
+  birthdate: DateTime
+}
+
+input UpdateUserInput {
+  """First Name of the user"""
+  firstName: String
+
+  """Last Name of the user"""
+  lastName: String
+
+  """E-mail of the user"""
+  email: String
+
+  """Password of the user"""
+  password: String
+
+  """Birthdate of the user"""
+  birthdate: DateTime
+}
