@@ -17,6 +17,7 @@ import { registerRootComponent } from "expo";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 import { NavigationContainer } from "@react-navigation/native";
+import Calendar from "./components/Calendar";
 
 // const fontSize = 13;
 const topbarHeight = 50;
@@ -163,8 +164,9 @@ const App = () => {
                 screenOptions={{ tabBarStyle: { height: topbarHeight } }}
                 sceneContainerStyle={tw`bg-slate-900 text-white`}
             >
-                <Tab.Screen name="Home" component={Container} />
-                <Tab.Screen name="Settings" component={About} />
+                <Tab.Screen name="Chat" component={Container} />
+                <Tab.Screen name="Calendar" component={Calendar} />
+                <Tab.Screen name="About" component={About} />
             </Tab.Navigator>
         </NavigationContainer>
     );
