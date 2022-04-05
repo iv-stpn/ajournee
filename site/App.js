@@ -19,6 +19,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import { NavigationContainer } from "@react-navigation/native";
 import Calendar from "./components/Calendar";
 
+
 // const fontSize = 13;
 const topbarHeight = 50;
 const inputHeight = 40;
