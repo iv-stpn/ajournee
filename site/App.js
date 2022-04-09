@@ -18,6 +18,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 
 import { NavigationContainer } from "@react-navigation/native";
 import Calendar from "./components/Calendar";
+import Test from "./Store/test";
 
 
 // const fontSize = 13;
@@ -168,6 +169,7 @@ const App = () => {
                 <Tab.Screen name="Chat" component={Container} />
                 <Tab.Screen name="Calendar" component={Calendar} />
                 <Tab.Screen name="About" component={About} />
+                <Tab.Screen name="Test" component={Test} />
             </Tab.Navigator>
         </NavigationContainer>
     );
