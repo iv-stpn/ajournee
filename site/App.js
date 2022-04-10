@@ -19,10 +19,15 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import { NavigationContainer } from "@react-navigation/native";
 import Calendar from "./components/Calendar";
 
+import {Notifications} from 'react-native-notifications';
+
+
 // const fontSize = 13;
 const topbarHeight = 50;
 const inputHeight = 40;
 const margin = 8;
+
+
 
 export const useKeyboardHeight = () => {
     const [keyboardHeight, setKeyboardHeight] = React.useState(0);
@@ -156,7 +161,21 @@ const About = () => <Text style={tw`text-white self-center mt-10`}>About</Text>;
 
 const Tab = createMaterialTopTabNavigator();
 
-const App = () => {
+
+    const App = () => {
+    Notifications.registerRemoteNotifications();
+
+    Notifications.events().registerNotificationReceivedForeground((notification, completion) => {
+      console.log(`Notification received in foreground: ${notification.title} : ${notification.body}`);
+      completion({alert: false, sound: false, badge: false});
+    });
+
+    Notifications.events().registerNotificationOpened((notification, completion) => {
+      console.log(`Notification opened: ${notification.payload}`);
+      completion();
+    });
+
+
     return (
         <NavigationContainer>
             <StatusBar animated={true} />

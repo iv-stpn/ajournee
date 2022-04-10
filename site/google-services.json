@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "635811489136",
+    "project_id": "journee-e79f8",
+    "storage_bucket": "journee-e79f8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635811489136:android:49d4f19eed8e68bfa51bb5",
+        "android_client_info": {
+          "package_name": "new.site"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "635811489136-du17424a84j6334fu1j50gbgppofn7jf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "new.site",
+            "certificate_hash": "91dabf09ccff09a1a8b076e6dd73b5eb04f7b94e"
+          }
+        },
+        {
+          "client_id": "635811489136-lut784nu7lj0p93ar6s06b0jcp2uf2dh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA95m3l4QXm1Rt53GcHnGlYMgFsKZiffZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "635811489136-lut784nu7lj0p93ar6s06b0jcp2uf2dh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
