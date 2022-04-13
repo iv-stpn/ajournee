@@ -1,175 +1,95 @@
-import {
-    Text,
-    View,
-    TextInput,
-    ScrollView,
-    useWindowDimensions,
-    Platform,
-    StatusBar,
-    Keyboard,
-    KeyboardEvent,
-} from "react-native";
-import tw from "twrnc";
+import React from "react";
+import { StatusBar } from "react-native";
 
-import React, { useState, FlatList } from "react";
-import { registerRootComponent } from "expo";
+import { persistor, store } from "@/reducers";
 
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 import { NavigationContainer } from "@react-navigation/native";
-import Calendar from "./components/Calendar";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+import { registerRootComponent } from "expo";
+import { useFonts } from "expo-font";
 
-// const fontSize = 13;
-const topbarHeight = 50;
-const inputHeight = 40;
-const margin = 8;
+import AppLoading from "expo-app-loading";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-export const useKeyboardHeight = () => {
-    const [keyboardHeight, setKeyboardHeight] = React.useState(0);
+import { TabBar } from "@/components/App/Navigation/TabBar";
+import { Header } from "@/components/App/Navigation/Header";
+import { AgendaTabHeader } from "@/components/App/Navigation/AgendaTabHeader";
 
-    function onKeyboardDidShow(e) {
-        // Remove type here if not using TypeScript
-        setKeyboardHeight(e.endCoordinates.height);
-    }
+import { CalendarScreen } from "@/screens/CalendarScreen";
+import { ContactScreen } from "@/screens/ContactScreen";
+import { ChatScreen } from "@/screens/ChatScreen";
 
-    function onKeyboardDidHide() {
-        setKeyboardHeight(0);
-    }
+import tw from "twrnc";
 
-    React.useEffect(() => {
-        const showSubscription = Keyboard.addListener(
-            "keyboardDidShow",
-            onKeyboardDidShow
-        );
-        const hideSubscription = Keyboard.addListener(
-            "keyboardDidHide",
-            onKeyboardDidHide
-        );
-        return () => {
-            showSubscription.remove();
-            hideSubscription.remove();
-        };
-    }, []);
+const Tab = createBottomTabNavigator();
 
-    return keyboardHeight;
+const Tabs = {
+    Units: {
+        component: ChatScreen,
+        label: "Ajouter",
+        iconName: "plus-circle",
+    },
+    Agenda: {
+        component: CalendarScreen,
+        header: AgendaTabHeader,
+        label: "Agenda",
+        iconName: "calendar",
+    },
+    Contacts: {
+        component: ContactScreen,
+        label: "Contacts",
+        iconName: "account-group",
+    },
 };
 
-const Input = ({ childToParent }) => {
-    const window = useWindowDimensions();
-    const [text, setText] = React.useState("");
-
-    const handleSubmit = (event) => {
-        childToParent(text);
-        setText("");
-    };
-
-    return (
-        <TextInput
-            value={text}
-            onChangeText={(text) => setText(text)}
-            onSubmitEditing={handleSubmit}
-            placeholder="Entrez votre commande !"
-            style={{
-                ...tw`h-full w-full mb-[2px] text-white border-0`,
-                ...Platform.select({
-                    web: {
-                        outline: "none",
-                    },
-                }),
-                marginHorizontal: margin,
-            }}
-            placeholderTextColor="#ddd"
-            blurOnSubmit={false}
-        />
-    );
+const getMaterialIcon = (icon, props) => {
+    return <MaterialCommunityIcons name={icon} {...props} />;
 };
-
-const Container = () => {
-    const window = useWindowDimensions();
-    const keyboardHeight = useKeyboardHeight();
-
-    const [textArray, setTextArray] = useState(["texet"]);
-
-    return (
-        <View
-            style={{
-                ...tw`bg-slate-900 flex-1 w-full`,
-            }}
-        >
-            <View>
-                <ScrollView
-                    contentContainerStyle={{
-                        flexGrow: 1,
-                    }}
-                    style={{
-                        height:
-                            window.height -
-                            ((StatusBar.currentHeight ?? 0) +
-                                keyboardHeight +
-                                topbarHeight +
-                                inputHeight +
-                                margin),
-                        width: window.width - margin,
-                    }}
-                >
-                    <View>
-                        <Text style={{ color: "white" }}>
-                            {JSON.stringify(window.width)}
-                            {"    "}
-                            {JSON.stringify(window.width - 2 * margin)}
-                        </Text>
-                        {textArray.map((text, i) => (
-                            <Text
-                                key={i}
-                                style={{
-                                    ...tw`bg-sky-500 rounded-md p-[5px]`,
-                                    margin: margin,
-                                    ...Platform.select({
-                                        web: {
-                                            wordBreak: "break-word",
-                                        },
-                                    }),
-                                    marginRight: "auto",
-                                }}
-                            >
-                                {text}
-                            </Text>
-                        ))}
-                    </View>
-                </ScrollView>
-            </View>
-
-            <View
-                style={{
-                    ...tw`bg-gray-800 m-[${margin}px] mt-0 rounded-md absolute bottom-0 left-0`,
-                    height: inputHeight,
-                    width: window.width - 2 * margin,
-                }}
-            >
-                <Input childToParent={(text) => setTextArray([...textArray, text])} />
-            </View>
-        </View>
-    );
-};
-
-const About = () => <Text style={tw`text-white self-center mt-10`}>About</Text>;
-
-const Tab = createMaterialTopTabNavigator();
 
 const App = () => {
+    let [fontsLoaded] = useFonts({
+        Montserrat: require("./assets/fonts/Montserrat-VariableFont_wght.ttf"),
+    });
+
+    if (!fontsLoaded) {
+        return <AppLoading />;
+    }
+
     return (
-        <NavigationContainer>
-            <StatusBar animated={true} />
-            <Tab.Navigator
-                screenOptions={{ tabBarStyle: { height: topbarHeight } }}
-                sceneContainerStyle={tw`bg-slate-900 text-white`}
-            >
-                <Tab.Screen name="Chat" component={Container} />
-                <Tab.Screen name="Calendar" component={Calendar} />
-                <Tab.Screen name="About" component={About} />
-            </Tab.Navigator>
-        </NavigationContainer>
+        <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+                <NavigationContainer>
+                    <StatusBar animated={true} />
+
+                    <Tab.Navigator
+                        initialRouteName={Object.entries(Tabs)[0].name}
+                        screenOptions={{ header: Header }}
+                        sceneContainerStyle={tw`bg-gray-900 text-white`}
+                        tabBar={TabBar}
+                    >
+                        {Object.entries(Tabs).map(
+                            ([name, { component, header, label, iconName }], key) => (
+                                <Tab.Screen
+                                    key={key}
+                                    name={name}
+                                    component={component}
+                                    options={{
+                                        tabBarLabel: label,
+                                        tabBarIcon: (props) =>
+                                            getMaterialIcon(iconName, props),
+                                        ...(header ? { header } : {}),
+                                    }}
+                                />
+                            )
+                        )}
+                    </Tab.Navigator>
+                </NavigationContainer>
+            </PersistGate>
+        </Provider>
     );
 };
 
