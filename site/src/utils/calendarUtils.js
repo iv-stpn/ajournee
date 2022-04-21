@@ -1,11 +1,11 @@
-import moment from "moment";
-
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import isBetween from "dayjs/plugin/isBetween";
+import localizedFormat from "dayjs/plugin/localizedFormat";
 
 dayjs.extend(duration);
 dayjs.extend(isBetween);
+dayjs.extend(localizedFormat);
 
 export const $dayjs = dayjs;
 
@@ -290,45 +290,14 @@ export function stringHasContent(string) {
 export function getWeeksWithAdjacentMonths(targetDate, nWeeks, weekStartsOn = 0) {
     // Get the week of the target date, starting on sunday, then the nWeeks-1 following weeks
 
-    const startDay = moment(targetDate.$d).startOf("month");
+    const startDay = targetDate.startOf("month");
 
+    // console.log(startDay);
     return [...Array(nWeeks).keys()].map((week) =>
         [...[...Array(7).keys()].map((i) => i + weekStartsOn)].map((day) => {
-            return startDay
-                .clone()
+            return dayjs(startDay)
                 .add(7 * week, "day")
                 .day(day);
         })
     );
-
-    const weeks = [];
-
-    for (let i = 0; i < nWeeks; i++) {
-        const week = [];
-        for (let j = weekStartsOn; j < 7 + weekStartsOn; j++) {
-            week.push(moment(targetDate).day(j));
-        }
-        weeks.push(week);
-    }
-
-    return weeks;
-
-    // let weeks = calendarize(targetDate.toDate(), weekStartsOn);
-    // const firstDayIndex = weeks[0].findIndex((d) => d === 1);
-    // const lastDay = targetDate.endOf("month").date();
-    // const lastDayIndex = weeks[weeks.length - 1].findIndex((d) => d === lastDay);
-
-    // weeks = weeks.map((week, iw) => {
-    //     return week.map((d, id) => {
-    //         if (d !== 0) {
-    //             return d;
-    //         } else if (iw === 0) {
-    //             return d - (firstDayIndex - id - 1);
-    //         } else {
-    //             return lastDay + (id - lastDayIndex);
-    //         }
-    //     });
-    // });
-
-    // return weeks;
 }

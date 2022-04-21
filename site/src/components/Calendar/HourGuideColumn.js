@@ -9,9 +9,7 @@ import tw from "twrnc";
 const _HourGuideColumn = ({ cellHeight, hour, ampm }) => {
     return (
         <View style={[tw`flex items-center`, { height: cellHeight }]}>
-            <Text style={[tw`-mt-1.5 text-gray-200 text-base`]}>
-                {formatHour(hour, ampm)}
-            </Text>
+            <Text style={[tw`text-gray-200 text-base`]}>{formatHour(hour, ampm)}</Text>
         </View>
     );
 };

@@ -10,9 +10,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { registerRootComponent } from "expo";
-import { useFonts } from "expo-font";
-
-import AppLoading from "expo-app-loading";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 import { TabBar } from "@/components/App/Navigation/TabBar";
@@ -22,6 +19,7 @@ import { AgendaTabHeader } from "@/components/App/Navigation/AgendaTabHeader";
 import { CalendarScreen } from "@/screens/CalendarScreen";
 import { ContactScreen } from "@/screens/ContactScreen";
 import { ChatScreen } from "@/screens/ChatScreen";
+import { ExtensionScreen } from "@/screens/ExtensionScreen";
 
 import tw from "twrnc";
 
@@ -44,6 +42,11 @@ const Tabs = {
         label: "Contacts",
         iconName: "account-group",
     },
+    Extensions: {
+        component: ExtensionScreen,
+        label: "Extensions",
+        iconName: "puzzle-plus",
+    },
 };
 
 const getMaterialIcon = (icon, props) => {
@@ -51,14 +54,6 @@ const getMaterialIcon = (icon, props) => {
 };
 
 const App = () => {
-    let [fontsLoaded] = useFonts({
-        Montserrat: require("./assets/fonts/Montserrat-VariableFont_wght.ttf"),
-    });
-
-    if (!fontsLoaded) {
-        return <AppLoading />;
-    }
-
     return (
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>

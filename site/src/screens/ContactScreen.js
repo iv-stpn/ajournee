@@ -1,16 +1,15 @@
-import { View } from "react-native";
+import { View, Platform } from "react-native";
+import { WebView } from "react-native-webview";
 
 import Text from "@/components/App/Text";
-import { Ripple } from "@/components/App/TouchableRipple";
 
 import tw from "twrnc";
+import { ExtensionImporter } from "@/extensions/ExtensionImporter";
 
 export const ContactScreen = () => {
     return (
         <View>
-            <Ripple rippleSize={176} rippleDuration={500}>
-                <Text style={tw`text-white self-center mt-10`}>About</Text>
-            </Ripple>
+            <Text style={{ color: "white" }}>ContactScreen</Text>
         </View>
     );
 };

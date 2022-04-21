@@ -14,7 +14,7 @@ import {
     getWeeksWithAdjacentMonths,
 } from "@/utils/calendarUtils";
 import { CalendarEventMonth } from "@/components/CalendarMonth/CalendarEventMonth";
-import { Ripple } from "../App/TouchableRipple";
+import { TouchableOpacity } from "react-native";
 
 function _CalendarBodyMonth({
     containerHeight,
@@ -180,7 +180,7 @@ function _CalendarBodyMonth({
                 style,
             ]}
             onLayout={({ nativeEvent: { layout } }) => setCalendarWidth(layout.width)}
-            {...panResponder.panHandlers}
+            // {...panResponder.panHandlers}
         >
             {weeks.map((week, i) => {
                 const weekEvents = generateEvents(week);
@@ -197,7 +197,7 @@ function _CalendarBodyMonth({
                         ]}
                     >
                         {week.map((date, j) => (
-                            <Ripple
+                            <TouchableOpacity
                                 onPress={() =>
                                     date &&
                                     onPressCell &&
@@ -232,7 +232,6 @@ function _CalendarBodyMonth({
                                 >
                                     {date.format("D")}
                                 </Text>
-
                                 <View style={tw`m-1.5`}>
                                     {weekEvents[j].reduce(
                                         (elements, event, index, events) => {
@@ -305,7 +304,7 @@ function _CalendarBodyMonth({
                                         []
                                     )}
                                 </View>
-                            </Ripple>
+                            </TouchableOpacity>
                         ))}
                     </View>
                 );

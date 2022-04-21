@@ -53,23 +53,24 @@ function _CalendarBodyWeek({
     const scrollView = React.useRef(null);
     const { now } = useNow(!hideNowIndicator);
 
-    React.useEffect(() => {
-        if (scrollView.current && scrollOffsetMinutes && Platform.OS !== "ios") {
-            // We add delay here to work correct on React Native
-            // see: https://stackoverflow.com/questions/33208477/react-native-android-scrollview-scrollto-not-working
-            setTimeout(
-                () => {
-                    if (scrollView && scrollView.current) {
-                        scrollView.current.scrollTo({
-                            y: (cellHeight * scrollOffsetMinutes) / 60,
-                            animated: false,
-                        });
-                    }
-                },
-                Platform.OS === "web" ? 0 : 10
-            );
-        }
-    }, [scrollView, scrollOffsetMinutes, cellHeight]);
+    // const scrollOffsetMinutes = 1;
+    // React.useEffect(() => {
+    //     if (scrollView.current && scrollOffsetMinutes && Platform.OS !== "ios") {
+    //         // We add delay here to work correct on React Native
+    //         // see: https://stackoverflow.com/questions/33208477/react-native-android-scrollview-scrollto-not-working
+    //         setTimeout(
+    //             () => {
+    //                 if (scrollView && scrollView.current) {
+    //                     scrollView.current.scrollTo({
+    //                         y: (cellHeight * scrollOffsetMinutes) / 60,
+    //                         animated: false,
+    //                     });
+    //                 }
+    //             },
+    //             Platform.OS === "web" ? 0 : 10
+    //         );
+    //     }
+    // }, [scrollView, scrollOffsetMinutes, cellHeight]);
 
     const panResponder = usePanResponder({
         onSwipeHorizontal,

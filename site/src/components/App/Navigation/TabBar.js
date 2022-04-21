@@ -2,8 +2,8 @@ import { View } from "react-native";
 import Text from "@/components/App/Text";
 
 import tw from "twrnc";
-import { Ripple } from "../TouchableRipple";
 import { selectNone } from "@/styles/commonStyles";
+import { TouchableOpacity } from "react-native";
 
 export function TabBar({ state, descriptors, navigation }) {
     return (
@@ -33,15 +33,9 @@ export function TabBar({ state, descriptors, navigation }) {
                 };
 
                 return (
-                    <Ripple
-                        accessibilityRole="button"
-                        accessibilityStates={isFocused ? ["selected"] : []}
-                        accessibilityLabel={options.tabBarAccessibilityLabel}
-                        testID={options.tabBarTestID}
+                    <TouchableOpacity
                         onPress={onPress}
                         onLongPress={onLongPress}
-                        rippleColor={tw`text-gray-500`.color}
-                        rippleCentered={true}
                         style={tw`flex-1 justify-center items-center h-full`}
                         key={index}
                     >
@@ -59,7 +53,7 @@ export function TabBar({ state, descriptors, navigation }) {
                         >
                             {label}
                         </Text>
-                    </Ripple>
+                    </TouchableOpacity>
                 );
             })}
         </View>
