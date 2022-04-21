@@ -9,7 +9,7 @@ import tw from "twrnc";
 export default () => {
     const dispatch = useDispatch();
     const [text, setText] = useState("");
-
+    const [isActive, setActive] = useState(false);
     return (
         <TextInput
             value={text}
@@ -17,13 +17,16 @@ export default () => {
             onSubmitEditing={() => (dispatch({ type: "ADD_COMMAND", text }), setText(""))}
             placeholder="Entrez votre commande !"
             style={{
-                fontFamily: "Montserrat",
-                ...tw`h-full w-full mb-[2px] text-white border-0 text-base px-2 py-3`,
+                ...tw`h-full w-full bg-gray-800 rounded-md text-white text-base px-2 py-3`,
                 ...outlineNone,
-                marginHorizontal: CHAT_INPUT_MARGIN_X,
+                borderColor: isActive ? '#2382d8' : `#1f2937`,
+                borderWidth: 2,
+                fontFamily: "Montserrat",
+                
             }}
             placeholderTextColor="#ddd"
             blurOnSubmit={false}
+            onFocus={() => setActive(true)} onBlur={() => setActive(false)}
         />
     );
 };
