@@ -13,6 +13,8 @@ import ChatInput from "@/components/Chat/ChatInput";
 
 import { breakWord, CHAT_INPUT_MARGIN_X } from "@/styles/commonStyles";
 
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+
 import tw from "twrnc";
 
 export const useKeyboardHeight = () => {
@@ -57,50 +59,59 @@ export const ChatScreen = () => {
     const textSpacing = { margin: CHAT_INPUT_MARGIN_X, marginRight: "auto", padding: 5 };
 
     return (
-        <View style={tw`bg-slate-900 flex-1 w-full`}>
-            <ScrollView style={{ width: window.width - CHAT_INPUT_MARGIN_X }}>
-                {commands.map((text, index) => (
-                    <View key={index}>
-                        <Text style={[tw`bg-sky-500 rounded-md`, breakWord, textSpacing]}>
-                            {text}
-                        </Text>
-                        <View style={[tw`flex-row`, { marginLeft: CHAT_INPUT_MARGIN_X }]}>
-                            <Pressable>
-                                <Text
-                                    style={tw`bg-green-500 rounded-full w-10 h-5 text-center mr-2`}
+        <View style={tw`bg-slate-900 flex-1 flex-row`}>
+            <View style={tw`bg-slate-900 flex-1 w-full`}>
+                <ScrollView style={{ ...tw`w-full` }}>
+                    {commands.map((text, index) => (
+                        <View style={[tw`flex-row`, { marginRight: "auto" }]} key={index}>
+                            <Text style={[tw`bg-sky-500 rounded-md`, breakWord, textSpacing]}>
+                                {text}
+                            </Text>
+                            <View style={[tw`flex-row`, { marginRight: "auto", marginTop: "auto" }]}>
+                                <Pressable style={[tw`flex-row mr-6`]}>
+                                    <MaterialCommunityIcons name="share" size={16} color="grey" />
+                                </Pressable>
+                                <Pressable
+                                    onPress={() =>
+                                        dispatch({
+                                            type: "REMOVE_COMMAND",
+                                            index,
+                                        })
+                                    }
                                 >
-                                    See
-                                </Text>
-                            </Pressable>
-                            <Pressable
-                                onPress={() =>
-                                    dispatch({
-                                        type: "REMOVE_COMMAND",
-                                        index,
-                                    })
-                                }
-                            >
-                                <Text
-                                    style={tw`bg-red-500 rounded-full w-5 h-5 text-center`}
-                                >
-                                    X
-                                </Text>
-                            </Pressable>
+                                    {/* <Text
+                                        style={tw`bg-red-500 rounded-full w-5 h-5 text-center`}
+                                    >
+                                        X
+                                    </Text> */}
+                                </Pressable>
+                            </View>
                         </View>
-                    </View>
-                ))}
-            </ScrollView>
-
-            <View
-                style={{
-                    ...tw`bg-gray-800 mt-0 rounded-md`,
-                    width: window.width - 2 * CHAT_INPUT_MARGIN_X,
-                    marginHorizontal: CHAT_INPUT_MARGIN_X,
-                    marginBottom: CHAT_INPUT_MARGIN_X,
-                }}
-            >
-                <ChatInput />
+                    ))}
+                    
+            
+                </ScrollView>
+                
+                <View
+                    style={{
+                        ...tw`bg-gray-800 mt-0 rounded-md overflow-hidden w-auto`,
+                        marginLeft: CHAT_INPUT_MARGIN_X,
+                        marginRight: CHAT_INPUT_MARGIN_X + 2,
+                        marginBottom: CHAT_INPUT_MARGIN_X,
+                    }}
+                >
+                    <ChatInput />
+                </View>
             </View>
+            {
+                window.width > 600 && 
+                <View style={{ ...tw`h-full w-5/12 flex-row`, backgroundColor: '#414d57' }}>
+                    <MaterialCommunityIcons name="account" size={100} color="#81a4dd" />
+                    <Text style={{ color: 'white' }}>
+                        JE SUIS VEry BIG
+                    </Text>
+                </View>
+            }
         </View>
     );
 };
