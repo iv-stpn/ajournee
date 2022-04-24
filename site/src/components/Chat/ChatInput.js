@@ -17,12 +17,12 @@ export default () => {
             onSubmitEditing={() => (dispatch({ type: "ADD_COMMAND", text }), setText(""))}
             placeholder="Entrez votre commande !"
             style={{
-                ...tw`h-full w-full bg-gray-800 rounded-md text-white text-base px-2 py-3`,
+                ...tw`h-full w-full rounded-md text-white text-base px-2 py-3`,
                 ...outlineNone,
-                borderColor: isActive ? '#2382d8' : `#1f2937`,
+                borderColor: isActive ? '#2382d8' : '#424656',
                 borderWidth: 2,
                 fontFamily: "Montserrat",
-                
+                backgroundColor: "#424656"
             }}
             placeholderTextColor="#ddd"
             blurOnSubmit={false}

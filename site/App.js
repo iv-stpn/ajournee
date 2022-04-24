@@ -21,6 +21,9 @@ import { ContactScreen } from "@/screens/ContactScreen";
 import { ChatScreen } from "@/screens/ChatScreen";
 import { ExtensionScreen } from "@/screens/ExtensionScreen";
 
+import AppLoading from 'expo-app-loading';
+import { useFonts } from 'expo-font';
+
 import tw from "twrnc";
 
 const Tab = createBottomTabNavigator();
@@ -54,6 +57,13 @@ const getMaterialIcon = (icon, props) => {
 };
 
 const App = () => {
+    let [fontsLoaded] = useFonts({
+        'Montserrat': require('./assets/fonts/Montserrat-VariableFont_wght.ttf'),
+      });
+    
+      if (!fontsLoaded) {
+        return <AppLoading />;
+      }
     return (
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
@@ -63,7 +73,7 @@ const App = () => {
                     <Tab.Navigator
                         initialRouteName={Object.entries(Tabs)[0].name}
                         screenOptions={{ header: Header }}
-                        sceneContainerStyle={tw`bg-gray-900 text-white`}
+                        sceneContainerStyle={{...tw`text-white`, backgroundColor: "#323644"}}
                         tabBar={TabBar}
                     >
                         {Object.entries(Tabs).map(
