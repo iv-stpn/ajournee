@@ -19,14 +19,14 @@ export default () => {
             style={{
                 ...tw`h-full w-full rounded-md text-white text-base px-2 py-3`,
                 ...outlineNone,
-                borderColor: isActive ? '#2382d8' : '#424656',
-                borderWidth: 2,
-                fontFamily: "Montserrat",
-                backgroundColor: "#424656"
+                // borderColor: isActive ? "#2382d8" : "#424656",
+                // borderWidth: 2,
+                backgroundColor: "#424656",
             }}
             placeholderTextColor="#ddd"
             blurOnSubmit={false}
-            onFocus={() => setActive(true)} onBlur={() => setActive(false)}
+            onFocus={() => setActive(true)}
+            onBlur={() => setActive(false)}
         />
     );
 };
