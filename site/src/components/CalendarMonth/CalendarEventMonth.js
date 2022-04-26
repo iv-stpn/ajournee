@@ -67,7 +67,7 @@ function _CalendarEventMonth({
                     <View {...touchableOpacityProps}>
                         <Text
                             style={[
-                                tw`truncate text-xs text-white`,
+                                tw`text-xs text-white`,
                                 isRTL && { textAlign: "right" },
                             ]}
                             numberOfLines={1}

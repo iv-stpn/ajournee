@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Pressable, useWindowDimensions, Platform, Keyboard } from "react-native";
+import {
+    View,
+    Pressable,
+    useWindowDimensions,
+    Platform,
+    Keyboard,
+    TouchableOpacity,
+} from "react-native";
 
 import ScrollView from "@/components/App/ScrollView";
 
@@ -18,7 +25,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { selectNone } from "@/styles/commonStyles";
 
 import tw from "twrnc";
-import { TouchableOpacity } from "react-native-web";
 
 export const useKeyboardHeight = () => {
     const [_keyboardHeight, setKeyboardHeight] = useState(0);
@@ -123,7 +129,7 @@ export const ChatScreen = () => {
                     <TouchableOpacity>
                         <MaterialCommunityIcons
                             style={{
-                                ...tw`px-2 py-3 cursor-pointer`,
+                                ...tw`px-2 py-3`,
                                 color: "#ccc",
                                 ...selectNone,
                                 ...(Platform.OS === "web" ? {} : {}),
