@@ -7,7 +7,7 @@ import { TouchableOpacity } from "react-native";
 
 export function TabBar({ state, descriptors, navigation }) {
     return (
-        <View style={tw`flex-row justify-center items-center h-16 w-full bg-slate-800`}>
+        <View style={{...tw`flex-row justify-center items-center h-16 w-full`, backgroundColor: '#272a37'}}>
             {state.routes.map((route, index) => {
                 const { options } = descriptors[route.key];
                 const label = options.tabBarLabel ?? options.title ?? route.name;

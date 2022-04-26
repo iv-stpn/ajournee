@@ -7,18 +7,16 @@ export const OVERLAP_PADDING = Platform.OS === "web" ? 3 : 0;
 
 export const CHAT_INPUT_MARGIN_X = 8;
 
-export const selectNone = { userSelect: "none" };
+export const selectNone = Platform.select({
+    web: { userSelect: "none" },
+});
 
 export const outlineNone = Platform.select({
-    web: {
-        outline: "none",
-    },
+    web: { outline: "none" },
 });
 
 export const breakWord = Platform.select({
-    web: {
-        wordBreak: "break-word",
-    },
+    web: { wordBreak: "break-word" },
 });
 
 export const eventCellCss = StyleSheet.create({
