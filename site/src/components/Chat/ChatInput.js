@@ -14,7 +14,9 @@ export default () => {
         <TextInput
             value={text}
             onChangeText={(text) => setText(text)}
-            onSubmitEditing={() => (dispatch({ type: "ADD_COMMAND", text }), setText(""))}
+            onSubmitEditing={() => (
+                dispatch({ type: "ADD_COMMAND", text })
+                ,setText(""))}
             placeholder="Entrez votre commande !"
             style={{
                 ...tw`h-full w-full rounded-md text-white text-base px-2 py-3`,

@@ -58,7 +58,7 @@ export const useKeyboardHeight = () => {
 export const ChatScreen = () => {
     const window = useWindowDimensions();
     const keyboardHeight = useKeyboardHeight();
-
+    
     const dispatch = useDispatch();
     const commands = useSelector((state) => state.commands);
 

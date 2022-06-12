@@ -1,8 +1,8 @@
 import { $dayjs } from "@/utils/calendarUtils";
 import _ from "lodash";
 import React, { useState } from "react";
-import { Platform, View } from "react-native";
-import Text from "@/components/App/Text";
+import { Platform, View, Text } from "react-native";
+
 
 import tw from "twrnc";
 
@@ -52,7 +52,7 @@ function _CalendarBodyMonth({
     });
 
     const weeks = getWeeksWithAdjacentMonths(targetDate, 6, weekStartsOn);
-
+    
     const minCellHeight = containerHeight / 5 - 30;
 
     const getCalendarCellStyle = React.useMemo(

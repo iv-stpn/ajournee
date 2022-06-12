@@ -4,6 +4,8 @@ export default (state = "week", action) => {
             return "week";
         case "SWITCH_MONTH":
             return "month";
+        case "SWITCH_MONTHYEAR":
+            return "picker";
         default:
             return state;
     }

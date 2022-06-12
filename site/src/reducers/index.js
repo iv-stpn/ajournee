@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
 import switchView from "./switchView";
+import changeMonth from "./changeMonth"
 import commands from "./commands";
+import events from "./events";
 
 import { createStore } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
@@ -13,7 +15,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(
     persistConfig,
-    combineReducers({ switchView, commands })
+    combineReducers({ switchView, commands, changeMonth, events })
 );
 
 export const store = createStore(persistedReducer);
